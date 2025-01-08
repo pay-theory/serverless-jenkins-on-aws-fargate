@@ -112,10 +112,10 @@ data "aws_iam_policy_document" ecs_execution_policy {
   statement {
     effect = "Allow"
     actions = [
-      "ecr:GetAuthorizationToken",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage",
+	  "ecr:GetAuthorizationToken",
+	  "ecr:BatchCheckLayerAvailability",
+	  "ecr:GetDownloadUrlForLayer",
+	  "ecr:BatchGetImage",
       "logs:CreateLogStream",
       "logs:CreateLogGroup",
       "logs:PutLogEvents"
@@ -163,6 +163,17 @@ data "aws_iam_policy_document" jenkins_controller_task_policy {
     }
     resources = ["arn:aws:ecs:${local.region}:${local.account_id}:task-definition/*"]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:tagResource"
+    ]
+    resources = [
+		"arn:aws:ecs:${local.region}:${local.account_id}:task/serverless-jenkins-spot/*",
+		"arn:aws:ecs:${local.region}:${local.account_id}:task/serverless-jenkins-main/*",
+		"arn:aws:ecs:${local.region}:${local.account_id}:task-definition/*"		
+	]
+  }  
   statement {
     effect = "Allow"
     actions = [
