@@ -1,8 +1,6 @@
 jenkins:
-    systemMessage: "Amazon Fargate Demo"
+    systemMessage: "Pay Theory Build Server"
     numExecutors: 0
-    remotingSecurity:
-      enabled: true
     agentProtocols:
         - "JNLP4-connect"
     securityRealm:
@@ -32,7 +30,7 @@ jenkins:
               jenkinsUrl: "http://${jenkins_cloud_map_name}:${jenkins_controller_port}"
               templates:
                   - cpu: "512"
-                    image: "jenkins/inbound-agent"
+                    image: "805600764437.dkr.ecr.us-east-1.amazonaws.com/inbound-agent-repository:latest"
                     label: "build-example-spot"
                     executionRole: ${execution_role_arn}
                     launchType: "FARGATE"
@@ -57,7 +55,7 @@ jenkins:
               jenkinsUrl: "http://${jenkins_cloud_map_name}:${jenkins_controller_port}"
               templates:
                   - cpu: "512"
-                    image: "jenkins/inbound-agent"
+                    image: "jenkins/inbound-agent:latest-alpine-jdk21"
                     label: "build-example"
                     executionRole: ${execution_role_arn}
                     launchType: "FARGATE"

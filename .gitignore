@@ -30,3 +30,6 @@ tf.plan
 
 # Make it possible to check-in the bootstrap state
 !/example/bootstrap/**/*.tfstate
+
+.aws
+example/vars.sh
